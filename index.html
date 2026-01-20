@@ -3,295 +3,151 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SoulLyrics™ — Harmonize Your Life</title>
+<title>SoulLyrics™ Live System</title>
 <style>
-  /* General Styles */
-  body {
-    margin: 0;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
-    color: #f5f5f5;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  header {
-    text-align: center;
-    padding: 60px 20px;
-    background: linear-gradient(135deg, #302b63, #0f0c29);
-    position: relative;
-    overflow: hidden;
-  }
-
-  header h1 {
-    font-size: 3em;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
-  }
-
-  header p {
-    font-size: 1.2em;
-    max-width: 900px;
-    margin: auto;
-  }
-
-  main {
-    max-width: 1100px;
-    margin: 40px auto;
-    padding: 0 20px;
-  }
-
-  section {
-    margin-bottom: 50px;
-  }
-
-  h2 {
-    font-size: 2em;
-    color: #ffdd57;
-    margin-bottom: 20px;
-  }
-
-  p, li {
-    font-size: 1.1em;
-    margin-bottom: 15px;
-  }
-
-  ul {
-    margin-left: 20px;
-    padding-left: 0;
-  }
-
-  a.button {
-    display: inline-block;
-    padding: 14px 30px;
-    margin-top: 15px;
-    background-color: #ffdd57;
-    color: #0f0c29;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: background 0.3s;
-  }
-
-  a.button:hover {
-    background-color: #ffc107;
-  }
-
-  .chart-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 20px;
-  }
-
-  .zodiac {
-    flex: 0 0 80px;
-    margin: 10px;
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-
-  .zodiac:hover {
-    transform: scale(1.1);
-  }
-
-  .zodiac svg {
-    width: 60px;
-    height: 60px;
-    fill: #ffdd57;
-    stroke: #0f0c29;
-    stroke-width: 2px;
-    margin-bottom: 5px;
-  }
-
-  .zodiac-name {
-    font-size: 0.9em;
-    font-weight: bold;
-  }
-
-  .description-box {
-    background-color: rgba(255, 221, 87, 0.1);
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 15px;
-  }
-
-  input, select {
-    padding: 10px;
-    margin: 5px;
-    border-radius: 6px;
-    border: none;
-    font-size: 1em;
-  }
-
-  #results {
-    background-color: rgba(0,0,0,0.3);
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
-  }
-
-  footer {
-    text-align: center;
-    padding: 25px;
-    background-color: #1b1b3a;
-    font-size: 0.95em;
-    color: #ffdd57;
-  }
-
-  @media(max-width: 600px){
-    .zodiac {
-      flex: 0 0 40px;
-    }
-    header h1 { font-size: 2em; }
-    h2 { font-size: 1.5em; }
-  }
-
-  /* Aurora animation */
-  header::after {
-    content: '';
-    position: absolute;
-    top:0; left:0;
-    width:100%; height:100%;
-    background: linear-gradient(120deg, rgba(255,221,87,0.3), rgba(255,0,255,0.2), rgba(0,255,255,0.2));
-    animation: aurora 15s infinite alternate;
-    z-index: 0;
-  }
-
-  header * { position: relative; z-index: 1; }
-
-  @keyframes aurora {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
+  body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; margin:0; background: linear-gradient(to bottom,#f0f4f8,#ffffff); color:#222; line-height:1.6; }
+  header { background:#1b1b3a; color:#fff; text-align:center; padding:50px 20px; }
+  header h1 { font-size:3em; margin-bottom:10px; }
+  header p { font-size:1.2em; max-width:800px; margin:auto; }
+  main { max-width:1100px; margin:20px auto; padding:0 20px; }
+  section { margin-bottom:40px; }
+  h2 { font-size:1.8em; color:#1b1b3a; margin-bottom:15px; }
+  label { display:block; margin:10px 0 5px; font-weight:bold; }
+  input, select { width:100%; padding:8px; margin-bottom:15px; border-radius:4px; border:1px solid #ccc; font-size:1em; }
+  button { padding:12px 25px; background:#1b1b3a; color:#fff; font-weight:bold; border:none; border-radius:6px; cursor:pointer; font-size:1.1em; }
+  button:hover { background:#333366; }
+  .results { margin-top:30px; background:#f8f9fb; padding:20px; border-radius:8px; border:1px solid #ccc; }
+  .chart { margin-top:20px; display:flex; flex-wrap:wrap; justify-content:space-around; }
+  .planet, .house, .domain { text-align:center; margin:10px; width:120px; }
+  .planet svg, .house svg, .domain svg { width:50px; height:50px; margin-bottom:5px; }
+  footer { text-align:center; padding:20px; background:#f0f4f8; color:#555; font-size:0.95em; }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>SoulLyrics™</h1>
-  <p>Integrative Intelligence for Life, Relationships, and Purpose. Harness the full spectrum of the 13 zodiac constellations, including <strong>Ophiuchus</strong>, lunar & solar cycles, and subtle energy mapping for harmony and alignment.</p>
+<h1>SoulLyrics™ Live System</h1>
+<p>Enter your birth details and unlock your full astrology, Harmonic Human, and numerology insights with Ophiuchus integration and Metatron Cube visualization.</p>
 </header>
 
 <main>
 
 <section>
-  <h2>Your Birth Info</h2>
-  <p>Enter your details to calculate your full SoulLyrics™ chart, numerology, and SL-HH insights.</p>
-  <input type="text" id="fullName" placeholder="Full Name" value="James Corwin Penwell">
-  <input type="date" id="birthDate" value="1990-02-10">
-  <input type="time" id="birthTime" value="07:22">
-  <input type="text" id="birthCity" placeholder="City" value="Columbus, OH">
-  <button onclick="calculateSL()">Calculate SoulLyrics™</button>
+<h2>Enter Your Birth Information</h2>
+<label for="fullName">Full Name:</label>
+<input type="text" id="fullName" placeholder="First Middle Last">
+
+<label for="birthDate">Birth Date:</label>
+<input type="date" id="birthDate">
+
+<label for="birthTime">Birth Time:</label>
+<input type="time" id="birthTime">
+
+<label for="birthCity">City:</label>
+<input type="text" id="birthCity" placeholder="City">
+
+<button id="calculateBtn">Calculate SoulLyrics™</button>
 </section>
 
-<section>
-  <h2>13 Zodiac Constellations</h2>
-  <div class="chart-container">
-    <div class="zodiac" onclick="showZodiac('Aries')"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30"/></svg><div class="zodiac-name">Aries</div></div>
-    <div class="zodiac" onclick="showZodiac('Taurus')"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30"/></svg><div class="zodiac-name">Taurus</div></div>
-    <div class="zodiac" onclick="showZodiac('Gemini')"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30"/></svg><div class="zodiac-name">Gemini</div></div>
-    <div class="zodiac" onclick="showZodiac('Cancer')"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30"/></svg><div class="zodiac-name">Cancer</div></div>
-    <div class="zodiac" onclick="showZodiac('Leo')"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30"/></svg><div class="zodiac-name">Leo</div></div>
-    <div class="zodiac" onclick="showZodiac('Virgo')"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30"/></svg><div class="zodiac-name">Virgo</div></div>
-    <div class="zodiac" onclick="showZodiac('Libra')"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30"/></svg><div class="zodiac-name">Libra</div></div>
-    <div class="zodiac" onclick="showZodiac('Scorpio')"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30"/></svg><div class="zodiac-name">Scorpio</div></div>
-    <div class="zodiac" onclick="showZodiac('Ophiuchus')"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30"/></svg><div class="zodiac-name">Ophiuchus</div></div>
-    <div class="zodiac" onclick="showZodiac('Sagittarius')"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30"/></svg><div class="zodiac-name">Sagittarius</div></div>
-    <div class="zodiac" onclick="showZodiac('Capricorn')"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30"/></svg><div class="zodiac-name">Capricorn</div></div>
-    <div class="zodiac" onclick="showZodiac('Aquarius')"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30"/></svg><div class="zodiac-name">Aquarius</div></div>
-    <div class="zodiac" onclick="showZodiac('Pisces')"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30"/></svg><div class="zodiac-name">Pisces</div></div>
-  </div>
-  <div id="zodiacDescription" class="description-box">Click a zodiac to see its SoulLyrics™ meaning and alignment.</div>
+<section class="results" id="results" style="display:none;">
+<h2>Results</h2>
+<div id="numerology"></div>
+<div id="astrology"></div>
+<div id="hhAnalysis"></div>
+<div id="metatronCube"></div>
 </section>
-
-<section>
-  <h2>SL-HH & Numerology Results</h2>
-  <div id="results">
-    <p>Default: James Corwin Penwell</p>
-    <p>Birth: 02/10/1990 07:22, Columbus, OH</p>
-    <p>Life Path: 22/4, Master Number 33</p>
-    <p>SL-HH chart and numerology will populate here after calculation.</p>
-  </div>
-</section>
-
-<section>
-  <h2>Get Started</h2>
-  <p>Schedule a consultation, discuss licensing opportunities, or become an early adopter of SoulLyrics™.</p>
-  <p>Email: <a href="mailto:SoulLyrics1111@gmail.com">SoulLyrics1111@gmail.com</a></p>
-  <p>Phone: <a href="tel:+15135200031">513-520-0031</a></p>
-  <a href="mailto:SoulLyrics1111@gmail.com" class="button">Contact Us Today</a>
-</section>
-
-</main>
 
 <footer>
-  <p>&copy; 2026 SoulLyrics™ | James Penwell & Jessica Melchior</p>
+<p>&copy; 2026 SoulLyrics™ | James Penwell & Jessica Melchior</p>
 </footer>
 
 <script>
-  const zodiacDescriptions = {
-    "Aries":"Courageous, energetic, pioneering energy. Focused on self-initiation and leadership.",
-    "Taurus":"Grounded, practical, pleasure-loving energy. Focused on stability and comfort.",
-    "Gemini":"Communicative, curious, adaptable. Focused on information, learning, and social interaction.",
-    "Cancer":"Emotional, nurturing, protective. Focused on home, family, and inner security.",
-    "Leo":"Confident, creative, generous. Focused on self-expression, leadership, and performance.",
-    "Virgo":"Analytical, service-oriented, detail-focused. Focused on health, work, and refinement.",
-    "Libra":"Diplomatic, harmonious, balanced. Focused on relationships, beauty, and fairness.",
-    "Scorpio":"Intense, transformative, magnetic. Focused on depth, power, and transformation.",
-    "Ophiuchus":"Healing, wisdom, mastery of self. Focused on spiritual growth and transformation.",
-    "Sagittarius":"Adventurous, philosophical, visionary. Focused on expansion, learning, and truth.",
-    "Capricorn":"Disciplined, ambitious, practical. Focused on career, structure, and responsibility.",
-    "Aquarius":"Innovative, humanitarian, intellectual. Focused on ideas, future, and social change.",
-    "Pisces":"Intuitive, compassionate, imaginative. Focused on dreams, spirituality, and connection."
+// Placeholder functions for live calculations
+function calculateSoulLyrics() {
+  const fullName = document.getElementById('fullName').value.trim();
+  const birthDate = document.getElementById('birthDate').value;
+  const birthTime = document.getElementById('birthTime').value;
+  const birthCity = document.getElementById('birthCity').value.trim();
+  if(!fullName || !birthDate || !birthTime || !birthCity){
+    alert('Please fill out all fields.');
+    return;
+  }
+  
+  document.getElementById('results').style.display = 'block';
+  
+  // --- Numerology ---
+  const lifePathNumber = computeLifePath(birthDate);
+  const masterNumber = checkMasterNumber(lifePathNumber);
+  document.getElementById('numerology').innerHTML = `
+    <h3>Numerology</h3>
+    <p><strong>Life Path Number:</strong> ${lifePathNumber}${masterNumber ? ' (Master Number!)' : ''}</p>
+    <p><strong>Full Name:</strong> ${fullName}</p>
+    <p>Interpretation: ${numerologyInterpretation(lifePathNumber)}</p>
+  `;
+  
+  // --- Astrology (including Ophiuchus) ---
+  document.getElementById('astrology').innerHTML = `
+    <h3>Astrology</h3>
+    <p><strong>Birth City:</strong> ${birthCity}</p>
+    <p><strong>Birth Time:</strong> ${birthTime}</p>
+    <p>Full 13-sign zodiac including <strong>Ophiuchus</strong> will be calculated here.</p>
+    <div class="chart" id="astrologyChart"></div>
+  `;
+  
+  // --- Harmonic Human ---
+  document.getElementById('hhAnalysis').innerHTML = `
+    <h3>Harmonic Human Analysis</h3>
+    <p>Personalized harmonic, energy, and timing analysis based on your full astrology chart and numerology.</p>
+  `;
+  
+  // --- Metatron Cube ---
+  document.getElementById('metatronCube').innerHTML = `
+    <h3>Metatron Cube Visualization</h3>
+    <svg width="200" height="200">
+      <circle cx="100" cy="100" r="90" stroke="#1b1b3a" stroke-width="2" fill="none"/>
+      <line x1="100" y1="10" x2="100" y2="190" stroke="#1b1b3a" stroke-width="2"/>
+      <line x1="10" y1="100" x2="190" y2="100" stroke="#1b1b3a" stroke-width="2"/>
+      <line x1="30" y1="30" x2="170" y2="170" stroke="#1b1b3a" stroke-width="2"/>
+      <line x1="30" y1="170" x2="170" y2="30" stroke="#1b1b3a" stroke-width="2"/>
+    </svg>
+  `;
+}
+
+// --- Numerology calculations ---
+function computeLifePath(dateStr){
+  const nums = dateStr.replace(/-/g,'').split('').map(Number);
+  const sum = nums.reduce((a,b)=>a+b,0);
+  return reduceToSingleOrMaster(sum);
+}
+
+function checkMasterNumber(num){
+  return [11,22,33].includes(num) ? num : null;
+}
+
+function reduceToSingleOrMaster(num){
+  if([11,22,33].includes(num)) return num;
+  return num.toString().split('').reduce((a,b)=>parseInt(a)+parseInt(b),0);
+}
+
+function numerologyInterpretation(num){
+  const interpretations = {
+    1: "Leadership, independence, individuality.",
+    2: "Balance, diplomacy, partnerships.",
+    3: "Creativity, communication, expression.",
+    4: "Stability, structure, discipline.",
+    5: "Adventure, freedom, versatility.",
+    6: "Responsibility, nurturing, harmony.",
+    7: "Introspection, spirituality, analysis.",
+    8: "Power, ambition, material success.",
+    9: "Compassion, humanitarianism, completion.",
+    11: "Master visionary, spiritual insight, inspiration.",
+    22: "Master builder, manifestation, global influence.",
+    33: "Master teacher, unconditional love, guidance."
   };
+  return interpretations[num] || "Unique combination of energies.";
+}
 
-  function showZodiac(name){
-    document.getElementById('zodiacDescription').innerHTML = `<strong>${name}:</strong> ${zodiacDescriptions[name]}`;
-  }
-
-  function calculateSL(){
-    const fullName = document.getElementById('fullName').value;
-    const birthDate = document.getElementById('birthDate').value;
-    const birthTime = document.getElementById('birthTime').value;
-    const birthCity = document.getElementById('birthCity').value;
-
-    // Placeholder SL-HH & Numerology logic
-    const resultsDiv = document.getElementById('results');
-    resultsDiv.innerHTML = `
-      <p><strong>Name:</strong> ${fullName}</p>
-      <p><strong>Birth:</strong> ${birthDate} ${birthTime}, ${birthCity}</p>
-      <p><strong>Life Path:</strong> ${getLifePath(fullName, birthDate)}</p>
-      <p><strong>Master Number:</strong> ${getMasterNumber(fullName)}</p>
-      <p><strong>SL-HH chart & numerology:</strong> Dynamic calculation placeholder for planets, houses, domains, and numerology.</p>
-    `;
-  }
-
-  function getLifePath(name, date){
-    // Simple numerology sum for demo
-    const nums = date.replace(/-/g,'').split('').map(Number);
-    let total = nums.reduce((a,b)=>a+b,0);
-    while(total>9 && total!==11 && total!==22 && total!==33){
-      total = total.toString().split('').map(Number).reduce((a,b)=>a+b,0);
-    }
-    return total;
-  }
-
-  function getMasterNumber(name){
-    const letters = name.toUpperCase().replace(/[^A-Z]/g,'');
-    let total = 0;
-    for(let i=0;i<letters.length;i++){
-      const val = (letters.charCodeAt(i)-64); 
-      total+= val;
-    }
-    while(total>9 && total!==11 && total!==22 && total!==33){
-      total = total.toString().split('').map(Number).reduce((a,b)=>a+b,0);
-    }
-    return total;
-  }
+document.getElementById('calculateBtn').addEventListener('click', calculateSoulLyrics);
 </script>
 
 </body>
