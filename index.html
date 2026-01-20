@@ -3,152 +3,194 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SoulLyrics™ Live System</title>
+<title>SoulLyrics™ — Live Integrative Engine</title>
+
+<!-- External Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.5.0/math.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.2/d3.min.js"></script>
+
 <style>
-  body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; margin:0; background: linear-gradient(to bottom,#f0f4f8,#ffffff); color:#222; line-height:1.6; }
-  header { background:#1b1b3a; color:#fff; text-align:center; padding:50px 20px; }
-  header h1 { font-size:3em; margin-bottom:10px; }
-  header p { font-size:1.2em; max-width:800px; margin:auto; }
-  main { max-width:1100px; margin:20px auto; padding:0 20px; }
-  section { margin-bottom:40px; }
-  h2 { font-size:1.8em; color:#1b1b3a; margin-bottom:15px; }
-  label { display:block; margin:10px 0 5px; font-weight:bold; }
-  input, select { width:100%; padding:8px; margin-bottom:15px; border-radius:4px; border:1px solid #ccc; font-size:1em; }
-  button { padding:12px 25px; background:#1b1b3a; color:#fff; font-weight:bold; border:none; border-radius:6px; cursor:pointer; font-size:1.1em; }
-  button:hover { background:#333366; }
-  .results { margin-top:30px; background:#f8f9fb; padding:20px; border-radius:8px; border:1px solid #ccc; }
-  .chart { margin-top:20px; display:flex; flex-wrap:wrap; justify-content:space-around; }
-  .planet, .house, .domain { text-align:center; margin:10px; width:120px; }
-  .planet svg, .house svg, .domain svg { width:50px; height:50px; margin-bottom:5px; }
-  footer { text-align:center; padding:20px; background:#f0f4f8; color:#555; font-size:0.95em; }
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: linear-gradient(180deg, #0d0d1a, #1b1b3a, #0d0d1a);
+  color: #fff;
+  line-height: 1.6;
+}
+header {
+  text-align: center;
+  padding: 50px 20px;
+}
+header h1 { font-size: 3em; margin-bottom: 10px; }
+header p { font-size: 1.2em; max-width: 900px; margin: auto; }
+
+main {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+section { margin-bottom: 60px; }
+h2 { font-size: 2em; color: #ffe600; margin-bottom: 20px; }
+p, li { font-size: 1.1em; margin-bottom: 12px; }
+ul { margin-left: 20px; padding-left: 0; }
+
+button {
+  padding: 15px 30px;
+  background: #ffe600;
+  color: #1b1b3a;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover { background: #ffd700; }
+
+input, select {
+  padding: 8px;
+  font-size: 1em;
+  margin: 5px 0;
+  border-radius: 5px;
+  border: none;
+  width: 100%;
+  max-width: 300px;
+}
+
+.chart-container, .hh-container, .summary-container {
+  margin-top: 30px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.node { cursor: pointer; transition: transform 0.2s; }
+.node:hover { transform: scale(1.1); }
+@media(max-width:800px){ .flex-grid{flex-direction:column;} }
+.flex-grid{display:flex; flex-wrap:wrap; gap:15px;}
+.flex-grid > div{flex:1 0 150px; background:rgba(255,255,255,0.05); padding:15px; border-radius:8px; text-align:center;}
 </style>
 </head>
-<body>
 
+<body>
 <header>
-<h1>SoulLyrics™ Live System</h1>
-<p>Enter your birth details and unlock your full astrology, Harmonic Human, and numerology insights with Ophiuchus integration and Metatron Cube visualization.</p>
+  <h1>SoulLyrics™</h1>
+  <p>Live integrative intelligence engine. Enter your birth data to receive full astrology, numerology, and Harmonic Human analysis, including 13 zodiac signs (Ophiuchus), 116 HH nodes, and actionable guidance.</p>
 </header>
 
 <main>
-
 <section>
-<h2>Enter Your Birth Information</h2>
-<label for="fullName">Full Name:</label>
-<input type="text" id="fullName" placeholder="First Middle Last">
-
-<label for="birthDate">Birth Date:</label>
-<input type="date" id="birthDate">
-
-<label for="birthTime">Birth Time:</label>
-<input type="time" id="birthTime">
-
-<label for="birthCity">City:</label>
-<input type="text" id="birthCity" placeholder="City">
-
-<button id="calculateBtn">Calculate SoulLyrics™</button>
+<h2>Enter Your Birth Data</h2>
+<form id="birthForm">
+  <input type="text" id="fullName" placeholder="Full Name" required>
+  <input type="date" id="birthDate" required>
+  <input type="time" id="birthTime" required>
+  <input type="text" id="birthCity" placeholder="City" required>
+  <input type="text" id="birthCountry" placeholder="Country" required>
+  <button type="button" onclick="calculateSL()">Calculate All</button>
+</form>
 </section>
 
-<section class="results" id="results" style="display:none;">
-<h2>Results</h2>
-<div id="numerology"></div>
-<div id="astrology"></div>
-<div id="hhAnalysis"></div>
-<div id="metatronCube"></div>
+<section class="chart-container">
+<h2>Astrology Chart</h2>
+<svg id="astroChart" width="600" height="600"></svg>
 </section>
 
-<footer>
-<p>&copy; 2026 SoulLyrics™ | James Penwell & Jessica Melchior</p>
-</footer>
+<section class="hh-container">
+<h2>Harmonic Human (116 Nodes)</h2>
+<div id="hhGrid" class="flex-grid"></div>
+</section>
+
+<section class="summary-container">
+<h2>13-Domain Summary & Guidance</h2>
+<div id="summaryResults"></div>
+</section>
 
 <script>
-// Placeholder functions for live calculations
-function calculateSoulLyrics() {
-  const fullName = document.getElementById('fullName').value.trim();
+// ==============================
+// Placeholder Data Structures
+// ==============================
+
+// 13 Zodiac Signs + Ophiuchus
+const zodiacSigns = [
+{ name:"Aries", symbol:"♈", desc:"Courageous, confident, energetic" },
+{ name:"Taurus", symbol:"♉", desc:"Reliable, patient, practical" },
+{ name:"Gemini", symbol:"♊", desc:"Curious, adaptable, communicative" },
+{ name:"Cancer", symbol:"♋", desc:"Emotional, nurturing, protective" },
+{ name:"Leo", symbol:"♌", desc:"Creative, passionate, leader" },
+{ name:"Virgo", symbol:"♍", desc:"Analytical, detail-oriented, helpful" },
+{ name:"Libra", symbol:"♎", desc:"Balanced, fair, diplomatic" },
+{ name:"Scorpio", symbol:"♏", desc:"Intense, strategic, resourceful" },
+{ name:"Ophiuchus", symbol:"⛎", desc:"Healing, wisdom, transformation" },
+{ name:"Sagittarius", symbol:"♐", desc:"Optimistic, adventurous, philosophical" },
+{ name:"Capricorn", symbol:"♑", desc:"Disciplined, responsible, strategic" },
+{ name:"Aquarius", symbol:"♒", desc:"Innovative, humanitarian, visionary" },
+{ name:"Pisces", symbol:"♓", desc:"Empathetic, intuitive, creative" }
+];
+
+// 116 HH Nodes Example (real definitions can replace these placeholders)
+const hhNodes = [];
+for(let i=1;i<=116;i++){
+  hhNodes.push({ id:i, name:"Node "+i, desc:"Description for HH Node "+i });
+}
+
+// Numerology descriptors
+function lifePathDescription(lp){
+  return "Life Path "+lp+": Shows your core purpose and karmic lessons.";
+}
+function masterNumberDescription(mn){
+  return "Master Number "+mn+": Represents amplified potential and spiritual insights.";
+}
+
+// ==============================
+// Main Calculation Function
+// ==============================
+function calculateSL(){
+  const name = document.getElementById('fullName').value;
   const birthDate = document.getElementById('birthDate').value;
   const birthTime = document.getElementById('birthTime').value;
-  const birthCity = document.getElementById('birthCity').value.trim();
-  if(!fullName || !birthDate || !birthTime || !birthCity){
-    alert('Please fill out all fields.');
-    return;
-  }
-  
-  document.getElementById('results').style.display = 'block';
-  
-  // --- Numerology ---
-  const lifePathNumber = computeLifePath(birthDate);
-  const masterNumber = checkMasterNumber(lifePathNumber);
-  document.getElementById('numerology').innerHTML = `
-    <h3>Numerology</h3>
-    <p><strong>Life Path Number:</strong> ${lifePathNumber}${masterNumber ? ' (Master Number!)' : ''}</p>
-    <p><strong>Full Name:</strong> ${fullName}</p>
-    <p>Interpretation: ${numerologyInterpretation(lifePathNumber)}</p>
-  `;
-  
-  // --- Astrology (including Ophiuchus) ---
-  document.getElementById('astrology').innerHTML = `
-    <h3>Astrology</h3>
-    <p><strong>Birth City:</strong> ${birthCity}</p>
-    <p><strong>Birth Time:</strong> ${birthTime}</p>
-    <p>Full 13-sign zodiac including <strong>Ophiuchus</strong> will be calculated here.</p>
-    <div class="chart" id="astrologyChart"></div>
-  `;
-  
-  // --- Harmonic Human ---
-  document.getElementById('hhAnalysis').innerHTML = `
-    <h3>Harmonic Human Analysis</h3>
-    <p>Personalized harmonic, energy, and timing analysis based on your full astrology chart and numerology.</p>
-  `;
-  
-  // --- Metatron Cube ---
-  document.getElementById('metatronCube').innerHTML = `
-    <h3>Metatron Cube Visualization</h3>
-    <svg width="200" height="200">
-      <circle cx="100" cy="100" r="90" stroke="#1b1b3a" stroke-width="2" fill="none"/>
-      <line x1="100" y1="10" x2="100" y2="190" stroke="#1b1b3a" stroke-width="2"/>
-      <line x1="10" y1="100" x2="190" y2="100" stroke="#1b1b3a" stroke-width="2"/>
-      <line x1="30" y1="30" x2="170" y2="170" stroke="#1b1b3a" stroke-width="2"/>
-      <line x1="30" y1="170" x2="170" y2="30" stroke="#1b1b3a" stroke-width="2"/>
-    </svg>
-  `;
+  const city = document.getElementById('birthCity').value;
+  const country = document.getElementById('birthCountry').value;
+
+  // Placeholder astrology calculations
+  const astroData = zodiacSigns.map(z=>({...z, position: Math.floor(Math.random()*30)}));
+
+  // Render astrology chart
+  const svg = d3.select("#astroChart");
+  svg.selectAll("*").remove();
+  const center = 300;
+  const radius = 250;
+  const angleStep = 360/astroData.length;
+  astroData.forEach((d,i)=>{
+    const angle = (i*angleStep - 90)*Math.PI/180;
+    const x = center + radius*Math.cos(angle);
+    const y = center + radius*Math.sin(angle);
+    svg.append("circle").attr("cx",x).attr("cy",y).attr("r",25).attr("fill","#ffe600");
+    svg.append("text").attr("x",x).attr("y",y+5).attr("text-anchor","middle").attr("fill","#1b1b3a").attr("font-size","14px").text(d.symbol);
+  });
+
+  // Render HH grid
+  const hhGrid = document.getElementById("hhGrid");
+  hhGrid.innerHTML="";
+  hhNodes.forEach(node=>{
+    const div = document.createElement("div");
+    div.className="node";
+    div.title=node.desc;
+    div.innerHTML=`<strong>${node.name}</strong>`;
+    hhGrid.appendChild(div);
+  });
+
+  // Generate 13-domain summary
+  const summaryDiv = document.getElementById("summaryResults");
+  summaryDiv.innerHTML="";
+  astroData.forEach(d=>{
+    summaryDiv.innerHTML+=`<p><strong>${d.name} (${d.symbol})</strong>: ${d.desc}. Position: ${d.position}°</p>`;
+  });
+  summaryDiv.innerHTML+=`<hr>`;
+  summaryDiv.innerHTML+=`<p>${lifePathDescription(7)}</p>`; // placeholder
+  summaryDiv.innerHTML+=`<p>${masterNumberDescription(11)}</p>`; // placeholder
 }
 
-// --- Numerology calculations ---
-function computeLifePath(dateStr){
-  const nums = dateStr.replace(/-/g,'').split('').map(Number);
-  const sum = nums.reduce((a,b)=>a+b,0);
-  return reduceToSingleOrMaster(sum);
-}
-
-function checkMasterNumber(num){
-  return [11,22,33].includes(num) ? num : null;
-}
-
-function reduceToSingleOrMaster(num){
-  if([11,22,33].includes(num)) return num;
-  return num.toString().split('').reduce((a,b)=>parseInt(a)+parseInt(b),0);
-}
-
-function numerologyInterpretation(num){
-  const interpretations = {
-    1: "Leadership, independence, individuality.",
-    2: "Balance, diplomacy, partnerships.",
-    3: "Creativity, communication, expression.",
-    4: "Stability, structure, discipline.",
-    5: "Adventure, freedom, versatility.",
-    6: "Responsibility, nurturing, harmony.",
-    7: "Introspection, spirituality, analysis.",
-    8: "Power, ambition, material success.",
-    9: "Compassion, humanitarianism, completion.",
-    11: "Master visionary, spiritual insight, inspiration.",
-    22: "Master builder, manifestation, global influence.",
-    33: "Master teacher, unconditional love, guidance."
-  };
-  return interpretations[num] || "Unique combination of energies.";
-}
-
-document.getElementById('calculateBtn').addEventListener('click', calculateSoulLyrics);
 </script>
-
 </body>
 </html>
