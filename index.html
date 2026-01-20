@@ -1,231 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SoulLyrics™ — Unlock Your Harmonic Blueprint</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-  body {
-    font-family: 'Montserrat', sans-serif;
-    margin:0;
-    padding:0;
-    background:#f5f5f5;
-    color:#111;
-  }
-  header {
-    background:#111;
-    color:#fff;
-    padding: 60px 20px;
-    text-align:center;
-  }
-  header h1 {
-    margin:0;
-    font-size: 3em;
-    letter-spacing:1px;
-  }
-  header p {
-    margin:10px 0 0 0;
-    font-size:1.3em;
-    font-weight:500;
-  }
-  .cta-button {
-    display:inline-block;
-    padding:18px 40px;
-    margin-top:25px;
-    background:#FFD700;
-    color:#111;
-    font-weight:bold;
-    text-decoration:none;
-    border-radius:12px;
-    transition:0.3s;
-  }
-  .cta-button:hover {
-    background:#FFC107;
-  }
-  section {
-    padding: 50px 20px;
-    text-align:center;
-  }
-  canvas {
-    margin: 30px auto;
-    display: block;
-  }
-  .founders {
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:50px;
-    margin-top:40px;
-  }
-  .founder-card {
-    width:250px;
-    padding:25px;
-    border:1px solid #ddd;
-    border-radius:15px;
-    background:#fff;
-    box-shadow:0 5px 15px rgba(0,0,0,0.05);
-    transition:0.3s;
-  }
-  .founder-card:hover {
-    box-shadow:0 10px 25px rgba(0,0,0,0.15);
-  }
-  .founder-card h3 {
-    margin:15px 0 5px 0;
-    font-weight:700;
-    font-size:1.2em;
-  }
-  .founder-card p {
-    margin:0;
-    font-size:0.95em;
-    color:#555;
-  }
-  footer {
-    background:#111;
-    color:#fff;
-    padding:25px;
-    text-align:center;
-    font-size:0.9em;
-  }
-  @media(max-width:600px){
-    .founders {
-      flex-direction: column;
-      align-items:center;
-    }
-  }
-  /* Tooltip */
-  .tooltip {
-    position: absolute;
-    background: #111;
-    color:#fff;
-    padding:8px 12px;
-    border-radius:6px;
-    font-size:0.85em;
-    pointer-events:none;
-    opacity:0;
-    transition:0.2s;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoulLyrics™</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #f8f0e3, #e6f0fa);
+            color: #222;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #4b3f72;
+            color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        header p {
+            font-size: 1.2em;
+        }
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        section {
+            margin-bottom: 40px;
+        }
+        h2 {
+            color: #4b3f72;
+            margin-bottom: 15px;
+        }
+        a.button {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #4b3f72;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+        a.button:hover {
+            background-color: #3a2e5a;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #e6e6e6;
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <h1>Welcome to SoulLyrics™</h1>
+        <p>The world’s first 13-consolation integrative intelligence system</p>
+    </header>
 
-<header>
-  <h1>SoulLyrics™</h1>
-  <p>Unlock Your Life’s Harmonic Blueprint</p>
-  <a href="mailto:SoulLyrics1111@gmail.com" class="cta-button">Schedule Your Free Consultation</a>
-</header>
+    <main>
+        <section>
+            <h2>Discover Harmony Through the Stars</h2>
+            <p>
+                SoulLyrics™ unifies traditional astrology (including <strong>Ophiuchus</strong>), numerology, psychology, subtle energy mapping, and AI-enhanced insights into a single coherent system.
+            </p>
+            <p>
+                Align your life, relationships, and purpose with personalized guidance derived from the universe’s natural harmonics.
+            </p>
+            <a href="mailto:SoulLyrics1111@gmail.com" class="button">Contact Us</a>
+        </section>
 
-<section>
-  <h2>Interactive SL-HH Harmonic Wheel</h2>
-  <canvas id="soulCycleCanvas" width="500" height="500"></canvas>
-  <p>Hover over each segment to explore the 13 Domains, Solar & Lunar Phases, and SoulCycles. Ophira (OP) highlights integration of all energies.</p>
-  <div class="tooltip" id="tooltip"></div>
-</section>
+        <section>
+            <h2>Why SoulLyrics™?</h2>
+            <ul>
+                <li>AI-assisted personal readings and guidance</li>
+                <li>Decision-making insights and timing recommendations</li>
+                <li>Integration with human design, numerology, and spiritual frequencies</li>
+                <li>Optional 13-month / 13 lunar & solar phases overlay</li>
+            </ul>
+        </section>
 
-<section class="founders">
-  <div class="founder-card">
-    <h3>James Corwin Penwell</h3>
-    <p>Co-Creator of SoulLyrics™</p>
-  </div>
-  <div class="founder-card">
-    <h3>Jessica Maecris Melchior</h3>
-    <p>Co-Creator of SoulLyrics™</p>
-  </div>
-</section>
+        <section>
+            <h2>Get Started</h2>
+            <p>
+                Connect with our founders directly for consultation, licensing opportunities, or early adopter insights.
+            </p>
+            <p>Email: <a href="mailto:SoulLyrics1111@gmail.com">SoulLyrics1111@gmail.com</a></p>
+            <p>Phone: <a href="tel:+15135200031">513-520-0031</a></p>
+        </section>
+    </main>
 
-<section>
-  <h2>Book Your Consultation Today</h2>
-  <p>Email: <a href="mailto:SoulLyrics1111@gmail.com">SoulLyrics1111@gmail.com</a> | Phone: 513-520-0031</p>
-  <a href="mailto:SoulLyrics1111@gmail.com" class="cta-button">Reserve Your Spot</a>
-</section>
-
-<footer>
-  &copy; 2026 SoulLyrics™ — All Rights Reserved
-</footer>
-
-<script>
-const canvas = document.getElementById("soulCycleCanvas");
-const ctx = canvas.getContext("2d");
-const centerX = canvas.width/2;
-const centerY = canvas.height/2;
-const radius = 200;
-
-const tooltip = document.getElementById("tooltip");
-
-// 13 domains with hover info
-const domains = [
-  {name:"Aries", color:"#FF6F61", info:"Fire & Power"},
-  {name:"Taurus", color:"#FFB85F", info:"Stability & Growth"},
-  {name:"Gemini", color:"#FFD56F", info:"Communication & Flexibility"},
-  {name:"Cancer", color:"#9FD5FF", info:"Emotion & Nurturing"},
-  {name:"Leo", color:"#FFD59F", info:"Courage & Creativity"},
-  {name:"Virgo", color:"#A3FF9F", info:"Analysis & Service"},
-  {name:"Libra", color:"#9FBFFF", info:"Balance & Harmony"},
-  {name:"Scorpio", color:"#C69FFF", info:"Transformation & Depth"},
-  {name:"Ophira", color:"#FF9FC6", info:"Integration & Wholeness"},
-  {name:"Sagittarius", color:"#FF6FBF", info:"Adventure & Expansion"},
-  {name:"Capricorn", color:"#B5B5FF", info:"Discipline & Ambition"},
-  {name:"Aquarius", color:"#6FC6FF", info:"Innovation & Vision"},
-  {name:"Pisces", color:"#6FFF9F", info:"Intuition & Compassion"}
-];
-const sliceAngle = (2 * Math.PI)/domains.length;
-
-function drawWheel(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  domains.forEach((domain,i)=>{
-    ctx.beginPath();
-    ctx.moveTo(centerX, centerY);
-    ctx.arc(centerX, centerY, radius, i*sliceAngle,(i+1)*sliceAngle);
-    ctx.closePath();
-    ctx.fillStyle = domain.color;
-    ctx.fill();
-
-    // labels
-    const angle = i*sliceAngle + sliceAngle/2;
-    const labelX = centerX + Math.cos(angle)*(radius+30);
-    const labelY = centerY + Math.sin(angle)*(radius+30);
-    ctx.fillStyle="#111";
-    ctx.font="bold 14px Montserrat";
-    ctx.textAlign="center";
-    ctx.fillText(domain.name,labelX,labelY);
-  });
-
-  // Rings
-  ctx.strokeStyle="#111";
-  ctx.lineWidth=2;
-  ctx.beginPath(); ctx.arc(centerX,centerY,radius+40,0,2*Math.PI); ctx.stroke(); // Solar
-  ctx.beginPath(); ctx.arc(centerX,centerY,radius+20,0,2*Math.PI); ctx.stroke(); // Lunar
-  ctx.beginPath(); ctx.arc(centerX,centerY,radius-20,0,2*Math.PI); ctx.stroke(); // SoulCycle
-
-  // Ophira highlight
-  const ophiraIndex = domains.findIndex(d=>d.name==="Ophira");
-  ctx.beginPath();
-  ctx.moveTo(centerX,centerY);
-  ctx.arc(centerX,centerY,radius+5,ophiraIndex*sliceAngle,(ophiraIndex+1)*sliceAngle);
-  ctx.closePath();
-  ctx.lineWidth=5;
-  ctx.strokeStyle="#FFD700";
-  ctx.stroke();
-}
-
-drawWheel();
-
-// Tooltip logic
-canvas.addEventListener("mousemove",(e)=>{
-  const rect = canvas.getBoundingClientRect();
-  const x = e.clientX - rect.left - centerX;
-  const y = e.clientY - rect.top - centerY;
-  let angle = Math.atan2(y,x);
-  if(angle<0) angle += 2*Math.PI;
-  const index = Math.floor(angle/sliceAngle);
-  const domain = domains[index];
-  tooltip.innerHTML = `${domain.name}: ${domain.info}`;
-  tooltip.style.left = `${e.clientX+15}px`;
-  tooltip.style.top = `${e.clientY+15}px`;
-  tooltip.style.opacity = 1;
-});
-canvas.addEventListener("mouseleave",()=>{tooltip.style.opacity=0;});
-</script>
-
+    <footer>
+        <p>&copy; 2026 SoulLyrics™ | James Corwin Penwell & Jessica Maecris Melchior</p>
+    </footer>
 </body>
 </html>
